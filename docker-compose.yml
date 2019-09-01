@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+
+  wp:
+    # secrets:
+    #   - db_root_password
+    #   - db_user_password
+    #   - db_user
+    env_file:
+      - wp.env
+    image: wp
+    networks:
+      - wp
+    build:
+      context: ./wp
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+# secrets:
+#   db_root_password:
+#     external: true
+#   db_user_password:
+#     external: true
+#   db_user:
+#     external: true
+
+networks:
+  wp:
