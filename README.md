@@ -7,3 +7,6 @@ Build a WordPress container using the wp-cli. This should provide control over t
 docker-compose build
 ```
 
+## TODO
+1.  Convert this repo to use docker secrets
+2.  Sort out the 'Wait for the DB to be ready before installing WP and continuing' code

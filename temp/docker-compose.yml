@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+
+  wp:
+    # secrets:
+    #   - db_root_password
+    #   - db_user_password
+    #   - db_user
+    env_file:
+      - wp.env
+    image: wp
+    networks:
+      - wp
+    build:
+      context: .
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - target: 80
+    environment:
+      WORDPRESS_DB_HOST: mysql-router:6446
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: mysql
+      WORDPRESS_DB_NAME: wp_db
+    networks:
+      - mysql-cluster
+
+# secrets:
+#   db_root_password:
+#     external: true
+#   db_user_password:
+#     external: true
+#   db_user:
+#     external: true
+
+networks:
+  wp:
+  mysql-cluster:
