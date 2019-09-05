@@ -1,7 +1,8 @@
 FROM wordpress
 
 # Install requirements for wp-cli support
-# RUN apt-get update \
+RUN apt-get update && \
+    apt-get install -y inetutils-ping sudo 
 #   && apt-get install -y sudo less mysql-client \
 #   && rm -rf /var/lib/apt/lists/*
 
@@ -10,16 +11,13 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     chmod +x wp-cli.phar && \
     mv wp-cli.phar /usr/local/bin/wp
 
-
-
-
 # COPY wp-su.sh /bin/wp
 # RUN chmod +x /bin/wp-cli.phar
 
 # RUN yum update -y \
 #   && yum clean all
 
-#USER www-data
+# USER www-data
 
 COPY wp_install.sh ./
 #RUN ./wp_install.sh
